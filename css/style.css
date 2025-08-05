@@ -18,5 +18,9 @@
 }
 
 #destacados{
+    width: 100%;
     margin-top: 5px;
+}
+#destacados .card{
+    border: 0 !important;
 }
