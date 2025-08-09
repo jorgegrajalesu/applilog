@@ -50,3 +50,24 @@ body{
         font-size:30px;
         z-index:100;
     }
+
+/*factura*/
+
+.invoice-header, .invoice-items, .invoice-totals{
+    border-radius: 2px;
+    margin: 0 auto;
+    text-align: center;
+    border: solid #000 1px;
+    padding: 5px;
+    width: 60%;
+}
+label, input{
+    margin: 0 auto;
+    width: 50%;
+    padding: 5px;
+}
+.button{
+    margin: 0 auto !important;
+    width: 100% !important;
+
+}
