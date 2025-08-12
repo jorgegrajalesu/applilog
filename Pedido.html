@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Pedido</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="preload" href="css/normalize.css" as="style">
+    <link rel="stylesheet" href="css/normalize.css">
+
+    <link rel="preload" href="css/style.css" as="style">
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!--precargar(preload) de las fuentes-->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,700;1,500&family=Ubuntu:ital,wght@0,500;1,300&display=swap"
+    crossorigin="crossorigin" as="font">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,700;1,500&family=Ubuntu:ital,wght@0,500;1,300&display=swap" rel="stylesheet">
+
+    
+    
+    <body>
+
+        <header class="header">
+            <div class="contenedor">
+                <div class="barra">
+    
+                    <a class="logo" href="index.html">
+                        <h1 class="logo__nombre no-margin centrar-texto">LOS APLASTADOS</h1>
+                    </a>
+                    
+                    <!--menu-->
+                    <nav class="menu">
+                        <a href="nosotros.html" class="menu__enlace">Nosotros</a>
+                        <a href="productos.html" class="menu__enlace">Productos</a>
+                        <a href="contacto.html" class="menu__enlace">Contacto</a>
+                    </nav>
+                </div>
+            </div>
+    
+            <div class="header__texto">
+                <h2 class="no-margin">LOS APLASTADOS DE YONVANA</h2>
+                <p class="no-margin">Preparando delicias</p>
+    
+            </div>
+        </header><!--fin encabezado-->
+
+
+        <div class="container">
+            <div class="row">
+                <!-- Elementos generados a partir del JSON -->
+                <main id="items" class="col-sm-8 row"></main>
+                <!-- Pedido -->
+                <aside class="col-sm-4">
+                    <h2>Pedido</h2>
+                    <!-- Elementos del Pedido -->
+                    <ul id="Pedido" class="list-group"></ul>
+                    <hr>
+                    <!-- Precio total -->
+                    <p class="text-right">Total: <span id="total"></span>&dollar;</p>
+                    <button id="boton-vaciar" class="btn btn-danger">Vaciar</button>
+
+                    <input class="boton" type="submit" value="Enviar">
+                    
+                </aside>
+            </div>
+        </div>
+    </body>
+    
+    <script>
+        window.onload = function () {
+            // Variables
+            const baseDeDatos = [
+                {
+                    id: 1,
+                    nombre: 'Aplastado',
+                    precio: 9000,
+                    imagen: '/images/Aplastados.png'
+                    
+
+                },
+                {
+                    id: 2,
+                    nombre: 'Arepas',
+                    precio: 9000,
+                    imagen: '/images/Arepas.png'
+                },
+                {
+                    id: 3,
+                    nombre: 'Hamburguesa',
+                    precio: 9000,
+                    imagen: '/images/Hamburguesa.png'
+                },
+                {
+                    id: 4,
+                    nombre: 'Patacones',
+                    precio: 11000,
+                    imagen: '/images/Patacones.png'
+                },
+
+                {
+                    id: 5,
+                    nombre: 'Perros',
+                    precio: 10000,
+                    imagen: '/images/Perros.png'
+                },
+
+            
+                {
+                    id: 6,
+                    nombre: 'Picadas',
+                    precio: 25000,
+                    imagen: '/images/Picadas.png'
+                },
+
+                {
+                    id: 7,
+                    nombre: 'Asados',
+                    precio: 12000,
+                    imagen: '/images/Asados.png'
+                },
+            ];
+
+            let Pedido = [];
+            let total = 0;
+            const DOMitems = document.querySelector('#items');
+            const DOMPedido = document.querySelector('#Pedido');
+            const DOMtotal = document.querySelector('#total');
+            const DOMbotonVaciar = document.querySelector('#boton-vaciar');
+            const miLocalStorage = window.localStorage;
+
+            // Funciones
+
+            /**
+            * Dibuja todos los productos a partir de la base de datos. No confundir con el Pedido
+            */
+            function renderizarProductos() {
+                baseDeDatos.forEach((info) => {
+                    // Estructura
+                    const miNodo = document.createElement('div');
+                    miNodo.classList.add('card', 'col-sm-4');
+                    // Body
+                    const miNodoCardBody = document.createElement('div');
+                    miNodoCardBody.classList.add('card-body');
+                    // Titulo
+                    const miNodoTitle = document.createElement('h5');
+                    miNodoTitle.classList.add('card-title');
+                    miNodoTitle.textContent = info.nombre;
+                    // Imagen
+                    const miNodoImagen = document.createElement('img');
+                    miNodoImagen.classList.add('img-fluid');
+                    miNodoImagen.setAttribute('src', info.imagen);
+                    // Precio
+                    const miNodoPrecio = document.createElement('p');
+                    miNodoPrecio.classList.add('card-text');
+                    //miNodoPrecio.textContent = info.precio + '$';
+                    miNodoPrecio.textContent =  '$' + info.precio;
+
+                    // Boton 
+                    const miNodoBoton = document.createElement('button');
+                    miNodoBoton.classList.add('btn', 'btn-primary');
+                    miNodoBoton.textContent = 'Añadir';
+                    miNodoBoton.setAttribute('marcador', info.id);
+                    miNodoBoton.addEventListener('click', anyadirProductoAlPedido);
+
+                    
+                    // Insertamos
+                    miNodoCardBody.appendChild(miNodoImagen);
+                    miNodoCardBody.appendChild(miNodoTitle);
+                    miNodoCardBody.appendChild(miNodoPrecio);
+                    miNodoCardBody.appendChild(miNodoBoton);
+                    miNodo.appendChild(miNodoCardBody);
+                    DOMitems.appendChild(miNodo);
+                });
+            }
+
+            /**
+            * Evento para añadir un producto al Pedido de la compra
+            */
+            function anyadirProductoAlPedido(evento) {
+                // Anyadimos el Nodo a nuestro Pedido
+                Pedido.push(evento.target.getAttribute('marcador'))
+                // Calculo el total
+                calcularTotal();
+                // Actualizamos el Pedido 
+                renderizarPedido();
+                // Actualizamos el LocalStorage
+                guardarPedidoEnLocalStorage();
+            }
+
+            /**
+            * Dibuja todos los productos guardados en el Pedido
+            */
+            function renderizarPedido() {
+                // Vaciamos todo el html
+                DOMPedido.textContent = '';
+                // Quitamos los duplicados
+                const PedidoSinDuplicados = [...new Set(Pedido)];
+                // Generamos los Nodos a partir de Pedido
+                PedidoSinDuplicados.forEach((item) => {
+                    // Obtenemos el item que necesitamos de la variable base de datos
+                    const miItem = baseDeDatos.filter((itemBaseDatos) => {
+                        // ¿Coincide las id? Solo puede existir un caso
+                        return itemBaseDatos.id === parseInt(item);
+                    });
+                    // Cuenta el número de veces que se repite el producto
+                    const numeroUnidadesItem = Pedido.reduce((total, itemId) => {
+                        // ¿Coincide las id? Incremento el contador, en caso contrario no mantengo
+                        return itemId === item ? total += 1 : total;
+                    }, 0);
+                    // Creamos el nodo del item del Pedido
+                    const miNodo = document.createElement('li');
+                    miNodo.classList.add('list-group-item', 'text-right', 'mx-2');
+                    miNodo.textContent = `${numeroUnidadesItem} x ${miItem[0].nombre} - ${miItem[0].precio}$`;
+                    // Boton de borrar
+                    const miBoton = document.createElement('button');
+                    miBoton.classList.add('btn', 'btn-danger', 'mx-5');
+                    miBoton.textContent = 'X';
+                    miBoton.style.marginLeft = '1rem';
+                    miBoton.dataset.item = item;
+                    miBoton.addEventListener('click', borrarItemPedido);
+                    // Mezclamos nodos
+                    miNodo.appendChild(miBoton);
+                    DOMPedido.appendChild(miNodo);
+                });
+            }
+
+            /**
+            * Evento para borrar un elemento del Pedido
+            */
+            function borrarItemPedido(evento) {
+                // Obtenemos el producto ID que hay en el boton pulsado
+                const id = evento.target.dataset.item;
+                // Borramos todos los productos
+                Pedido = Pedido.filter((PedidoId) => {
+                    return PedidoId !== id;
+                });
+                // volvemos a renderizar
+                renderizarPedido();
+                // Calculamos de nuevo el precio
+                calcularTotal();
+                // Actualizamos el LocalStorage
+                guardarPedidoEnLocalStorage();
+
+            }
+
+            /**
+            * Calcula el precio total teniendo en cuenta los productos repetidos
+            */
+            function calcularTotal() {
+                // Limpiamos precio anterior
+                total = 0;
+                // Recorremos el array del Pedido
+                Pedido.forEach((item) => {
+                    // De cada elemento obtenemos su precio
+                    const miItem = baseDeDatos.filter((itemBaseDatos) => {
+                        return itemBaseDatos.id === parseInt(item);
+                    });
+                    total = total + miItem[0].precio;
+                });
+                // Renderizamos el precio en el HTML
+                DOMtotal.textContent = total.toFixed(2);
+            }
+
+            /**
+            * Varia el Pedido y vuelve a dibujarlo
+            */
+            function vaciarPedido() {
+                // Limpiamos los productos guardados
+                Pedido = [];
+                // Renderizamos los cambios
+                renderizarPedido();
+                calcularTotal();
+                // Borra LocalStorage
+                localStorage.clear();
+
+            }
+
+            function guardarPedidoEnLocalStorage () {
+                miLocalStorage.setItem('Pedido', JSON.stringify(Pedido));
+            }
+
+            function cargarPedidoDeLocalStorage () {
+                // ¿Existe un Pedido previo guardado en LocalStorage?
+                if (miLocalStorage.getItem('Pedido') !== null) {
+                    // Carga la información
+                    Pedido = JSON.parse(miLocalStorage.getItem('Pedido'));
+                }
+            }
+
+            // Eventos
+            DOMbotonVaciar.addEventListener('click', vaciarPedido);
+
+            // Inicio
+            cargarPedidoDeLocalStorage();
+            renderizarProductos();
+            calcularTotal();
+            renderizarPedido();
+        }
+
+    </script> 
+</head>
+
+</html>
