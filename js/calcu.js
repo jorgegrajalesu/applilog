@@ -26,5 +26,10 @@
       } else {
         document.getElementById('resultado').textContent = n1 / n2;
       }
+
+      function potencia() {
+        const {n1, n2} = obtenerValores();
+        document.getElementById('resultado').textContent= n1 ^ n2;
+      }
     }
  
