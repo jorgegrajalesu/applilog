@@ -1,6 +1,6 @@
 function calculadora() {
-    let numero1= document.calculadora.numero1.value;
-    let numero2= document.calculadora.numero2.value;
+    let numero1= document.calculadoraBasica.numero1.value;
+    let numero2= document.calculadoraBasica.numero2.value;
 
      if (numero1 == 0 || numero1 == null || numero2 == null || numero2 == 0) {
         
@@ -12,11 +12,7 @@ function calculadora() {
         let prod = numero1 * numero2;
         //division
         let div = numero1/numero2
-        if (div==numero1/0) {
-            alert('no se puede hacer');
-        }else{
-            div = numero1 / numero2;
-        }
+        
         //resta
         let rest = numero1 - numero2;
         //potencia
