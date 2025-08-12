@@ -8,6 +8,7 @@ function calculadora() {
     }else{
         //suma
         let sum = numero1 + numero2;
+        
         //producto
         let prod = numero1 * numero2;
         //division
