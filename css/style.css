@@ -204,3 +204,18 @@ label, input{
     text-align: center;
     margin-top: 115px;
 }
+
+.container{
+    background-color: #fff;
+    width: 560px;
+    height: 350px;
+    border-radius: 50px;
+    padding: 50px;
+    box-shadow: 0 0 50px rgba(6, 6, 6, 0.344);
+}
+
+.titulo{
+    text-align: center;
+    font-size: 2.2rem;
+
+}
