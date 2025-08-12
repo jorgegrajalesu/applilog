@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>CRUD Básico con JavaScript</title>
+<link rel="stylesheet" href="css/crud.css">
+</head>
+<body>
+
+<h2>CRUD Básico con JavaScript</h2>
+
+<!-- Formulario -->
+<input type="text" id="nombre" placeholder="Nombre">
+<input type="email" id="email" placeholder="Email">
+<button onclick="crear()">Agregar</button>
+
+<!-- Tabla -->
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody id="tablaDatos"></tbody>
+</table>
+
+<script src="js/crud.js"></script>
+
+</body>
+</html>
