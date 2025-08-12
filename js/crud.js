@@ -9,6 +9,7 @@ function mostrar() {
         tabla.innerHTML += `
             <tr>
                 <td>${item.nombre}</td>
+                <td>${item.apellido}</td>
                 <td>${item.email}</td>
                 <td>
                     <button onclick="editar(${index})">Editar</button>
@@ -21,29 +22,32 @@ function mostrar() {
 
 function crear() {
     const nombre = document.getElementById("nombre").value;
+    const apellido = document.getElementById("apellido").value;
     const email = document.getElementById("email").value;
 
-    if (!nombre || !email) {
+    if (!nombre || !apellido || !email) {
         alert("Por favor, completa todos los campos");
         return;
     }
 
     if (editIndex === null) {
         // Crear nuevo registro
-        datos.push({ nombre, email });
+        datos.push({ nombre, apellido, email });
     } else {
         // Actualizar registro existente
-        datos[editIndex] = { nombre, email };
+        datos[editIndex] = { nombre, apellido, email };
         editIndex = null;
     }
 
     document.getElementById("nombre").value = "";
+    document.getElementById("apellido").value = "";
     document.getElementById("email").value = "";
     mostrar();
 }
 
 function editar(index) {
     document.getElementById("nombre").value = datos[index].nombre;
+    document.getElementById("apellido").value = datos[index].apellido;
     document.getElementById("email").value = datos[index].email;
     editIndex = index; // Guardar índice para actualización
 }
