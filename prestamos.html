@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Simulador de Préstamos</title>
+<link rel="stylesheet" href="css/prestamo.css">
+</head>
+<body>
+
+<h2>Simulador de Préstamos Bancarios</h2>
+
+<!-- Formulario -->
+<label>Monto del préstamo:</label>
+<input type="number" id="monto" placeholder="Ej: 10000"><br>
+
+<label>Tasa de interés anual (%):</label>
+<input type="number" id="tasa" placeholder="Ej: 12"><br>
+
+<label>Plazo (meses):</label>
+<input type="number" id="plazo" placeholder="Ej: 12"><br>
+
+<button onclick="calcularPrestamo()">Calcular</button>
+
+<!-- Resultados -->
+<h3>Resultados</h3>
+<p id="resultado"></p>
+
+<!-- Tabla de amortización -->
+<h3>Tabla de amortización</h3>
+<table id="tabla">
+    <thead>
+        <tr>
+            <th>Mes</th>
+            <th>Cuota</th>
+            <th>Interés</th>
+            <th>Capital</th>
+            <th>Saldo</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<script src="js/prestamo.js"></script>
+
+</body>
+</html>
