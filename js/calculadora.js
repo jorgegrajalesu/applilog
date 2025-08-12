@@ -19,7 +19,7 @@ function calculadora() {
         //resta
         resta = numero1 - numero2;
         //potencia
-        potencia = numero1 ^ numero2
+        potencia = numero1 ^ numero2;
 
 
         //mostrar datos
