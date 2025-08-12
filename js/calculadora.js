@@ -7,27 +7,27 @@ function calculadora() {
         alert("Digitar los numeros");
     }else{
         //suma
-        suma = numero1 + numero2;
+        sum = numero1 + numero2;
         //producto
-        producto = numero1 * numero2;
+        prod = numero1 * numero2;
         //division
-        if (division==numero1/0) {
+        if (div==numero1/0) {
             alert('no se puede hacer');
         }else{
-            division = numero1 / numero2;
+            div = numero1 / numero2;
         }
         //resta
-        resta = numero1 - numero2;
+        rest = numero1 - numero2;
         //potencia
-        potencia = numero1 ^ numero2;
+        pot = numero1 ^ numero2;
 
 
         //mostrar datos
-        document.getElementById('suma').innerHTML=suma;
-        document.getElementById('resta').innerHTML=resta;
-        document.getElementById('producto').innerHTML=producto;
-        document.getElementById('division').innerHTML=division;
-        document.getElementById('potencia').innerHTML=potencia;
+        document.getElementById('suma').innerHTML=sum;
+        document.getElementById('resta').innerHTML=rest;
+        document.getElementById('producto').innerHTML=prod;
+        document.getElementById('division').innerHTML=div;
+        document.getElementById('potencia').innerHTML=pot;
         
 
 
