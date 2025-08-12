@@ -7,19 +7,20 @@ function calculadora() {
         alert("Digitar los numeros");
     }else{
         //suma
-        sum = numero1 + numero2;
+        let sum = numero1 + numero2;
         //producto
-        prod = numero1 * numero2;
+        let prod = numero1 * numero2;
         //division
+        let div = numero1/numero2
         if (div==numero1/0) {
             alert('no se puede hacer');
         }else{
             div = numero1 / numero2;
         }
         //resta
-        rest = numero1 - numero2;
+        let rest = numero1 - numero2;
         //potencia
-        pot = numero1 ^ numero2;
+        let pot = numero1 ^ numero2;
 
 
         //mostrar datos
